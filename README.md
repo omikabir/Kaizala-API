@@ -48,15 +48,14 @@ def SendSMS_Kaizila(msg):
 	url_AccToken = "https://api.kaiza.la/v1/accessToken"
     body1 = ""
     headers = {
-        'applicationId':"qqqyyyy-xxxx-xxxx-1111-06bc000001q1",
-        'applicationSecret':"0101010101",
-		'refreshToken':"Paste the user Token from connector"
-        'cache-control':"no-cache"
+	'applicationId':"qqqyyyy-xxxx-xxxx-1111-06bc000001q1",
+	'applicationSecret':"0101010101",
+	'refreshToken':"Paste the user Token from connector"
+	'cache-control':"no-cache"
         }
     response = requests.request("GET", url_AccToken, data=body1, headers=headers)
-    
-	#Section 2
-	JsonData = json.loads(response.text)
+    #section 2
+    JsonData = json.loads(response.text)
     Tokn = JsonData["accessToken"]
     EndPoinUrl = JsonData["endpointUrl"]
     groupId = "xxx73ifsafxxxxxxyyyxxxxxx" 
