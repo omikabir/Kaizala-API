@@ -35,6 +35,8 @@
 ###### Finally, Including above 2 elements, we use "groupId" to send message using method "POST" Using
       URL ["https://{endpoint-url}/v1/groups/{group-id}/messages"]
 
+##### PythonSnip
+
 ```
 #Modify all veriable data as yours
 import requests
