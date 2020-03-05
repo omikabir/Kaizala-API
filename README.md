@@ -35,10 +35,11 @@
 ###### Finally, Including above 2 elements, we use "groupId" to send message using method "POST" Using
       URL ["https://{endpoint-url}/v1/groups/{group-id}/messages"]
 
-##### PythonSnip
+##### PythonSnip:: Modify all veriable as yours
 
 ```
-#Modify all veriable data as yours
+#Ref:https://docs.microsoft.com/en-us/rest/kaizala/
+
 import requests
 import json
 
