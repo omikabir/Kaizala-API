@@ -7,11 +7,12 @@
     so login will lead us home page of kaizala management page.
 
 #### At first, 
-    -A "Connector", is required which can be created from "Extension->Connectors". After creation, Add it to "MyCustomGroup" 
-    and Generate Token. [here "MyCustomGroup" is a group i am assuming to send the message using API]
+    A Kaizala "Connector", is required which can be created from "Extension->Connectors". 
+    After creation, Add it to "MyCustomGroup" and Generate Token. 
+    [here "MyCustomGroup" is a group i am assuming to send the message using API]
 
 #### Upon Creation of connector, We got 3 elements from "connector", As following:
-	 1.token [this is user/connector token that will be used to get Access Token, what we will create in program]
+	 1.token [this is user/connector token]
 	 2.applicationId
 	 3.applicationSecret
 
