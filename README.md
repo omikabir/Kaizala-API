@@ -26,36 +26,55 @@
 import requests
 import json
 
-def SendSMS_Kaizila(msg):
-    #Section 1
-	url_AccToken = "https://api.kaiza.la/v1/accessToken"
-    body1 = ""
-    headers = {
-	'applicationId':"qqqyyyy-xxxx-xxxx-1111-06bc000001q1",
-	'applicationSecret':"0101010101",
-	'refreshToken':"Paste the user Token from connector"
-	'cache-control':"no-cache"
+class Kaizala:
+    def __init__(self,appId,appSecret,connToken):
+        url_AccToken = "https://api.kaiza.la/v1/accessToken"
+        self.AppId = appId
+        self.AppSecret = appSecret
+        self.ConnToken = connToken
+        body1 = ""
+        headers = {
+            'applicationId': self.AppId,
+            'applicationSecret': self.AppSecret,
+            'refreshToken': self.ConnToken
+            }
+        self.response = requests.request("GET", url_AccToken, data=body1, headers=headers)
+        print(self.response.text)
+        Jsn1 = json.loads(self.response.text)
+        self.Tokn = Jsn1["accessToken"]
+        self.endUrl = Jsn1["endpointUrl"]
+    def SendSms(self,groupID,text):
+        Url_SendSMS = self.endUrl + "v1/groups/"+ groupID +"/messages"
+        hd = {
+            'accessToken': self.Tokn
         }
-    response = requests.request("GET", url_AccToken, data=body1, headers=headers)
-    #section 2
-    JsonData = json.loads(response.text)
-    Tokn = JsonData["accessToken"]
-    EndPoinUrl = JsonData["endpointUrl"]
-    groupId = "xxx73ifsafxxxxxxyyyxxxxxx" 
-    Url_SendSMS = EndPoinUrl + "v1/groups/"+ groupId +"/messages"
-    hd = {
-        'accessToken': Tokn
+        bdy = {
+            "message": text,
+            "sendToAllSubscribers" : "True"
         }
-    bdy = {
-        "message": msg,
-        "sendToAllSubscribers" : "True"
+        resp = requests.request("POST", Url_SendSMS, data=bdy, headers=hd)
+    def FetchAction(self,groupID,ActionType):
+        #GET https://{endpoint-url}/v1/groups/{test-group-id}/actions?actionType={actionType}
+        Url_SendSMS = self.endUrl + "v1/groups/"+ groupID +"/actions?actionType=" + ActionType
+        hd = {
+            'accessToken': self.Tokn
         }
-    resp = requests.request("POST", Url_SendSMS, data=bdy, headers=hd)
-    print(resp.text)
-
-txt = 'Sending SMS Successfull using Kaizila API' + '\n' + "new Line using '\ n \n'" + "Sign & Test is OK"
-SendSMS_Kaizila(txt)
-
-#if Opertion Successful then output will be as following
-#print output = {"referenceId":"0de2f027-bf2b-407d-903e-a3fba0ee33b1"}
+        bdy = ""
+        try:
+            resp = requests.request("GET", Url_SendSMS, data=bdy, headers=hd)
+            return resp
+        except:
+            print('ActionType not found, Please check')
+      
+applicationId = "yyaaaa-yyyy-yyyy-xxx-xxxxx"        
+ConnectorToken = "NvZnQ6d2luZG93cy1henVyZTp6dW1vIn0.QDEFj7xdNaITNC3MUmsTpzsrc649J6UipWzcm-KsRUMxxxxxx"
+applicationSecret = "0W4XXXXAAA"
+GroupID = "xaa42edfd-fswa-4rd3-aexx-xxxx111aaaa"
+x = Kaizala(applicationId,applicationSecret,ConnectorToken)
+## To SEnd SMS
+x.sendsms(GroupID,"Test SMS")
+## To read status of an Action
+getjob = x.FetchAction(GroupID,"cc")
+js = json.loads(getjob.text)
+print(js)
 ```
