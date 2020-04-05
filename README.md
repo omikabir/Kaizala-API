@@ -73,7 +73,7 @@ applicationSecret = "0W4XXXXAAA"
 GroupID = "xaa42edfd-fswa-4rd3-aexx-xxxx111aaaa"
 x = Kaizala(applicationId,applicationSecret,ConnectorToken)
 ## To SEnd SMS
-x.sendsms(GroupID,"Test SMS")
+x.SendSms(GroupID,"Test SMS")
 ## To read status of an Action
 getjob = x.FetchAction(GroupID,"cc")
 js = json.loads(getjob.text)
