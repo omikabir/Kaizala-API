@@ -3,7 +3,7 @@
 
 ### Basic Requirements and Operations:
 
-##### To Send SMS, the process executes in 2 Steps, In First Steps, Needs to generate an access token using token. To generate, 4 items required as following. 
+##### To Send SMS, the process executes in 2 Steps, In First Steps, Needs to generate an access token. To generate, 4 items required as following.
 ##### These items can be generated from https://manage.kaiza.la/
 	1. Connector
 	2. Connector Token [Belong to connector]
